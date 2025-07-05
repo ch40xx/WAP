@@ -90,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit" class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded">Login</button>
+         <div>
+          <a href="index.php" class="inline-block text-sm text-gray-600 hover:underline">← Back to Home</a>
+        </div>
         </form>
     </div>
 </body>

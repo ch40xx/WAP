@@ -32,6 +32,7 @@ session_start();
                         <a href="logout.php" class="hover:underline text-red-300">Logout</a>
                     <?php else: ?>
                         <a href="login.php" class="hover:underline">Login</a>
+                        <a href="register.php" class="hover:underline">Register</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -48,7 +49,7 @@ session_start();
             </p>
 
             <?php if (!isset($_SESSION['student_id'])): ?>
-                <a href="login.php" class="bg-gray-800 hover:bg-gray-600 text-white px-6 py-2 rounded">Login Now</a>
+                <a href="login.php" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded">Login Now</a>
             <?php else: ?>
                 <a href="dashboard.php" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded">Go to Dashboard</a>
             <?php endif; ?>
