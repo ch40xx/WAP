@@ -55,7 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login | Student Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<body class="relative bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center">
+  <div class="absolute inset-0 -z-10">
+    <svg class="w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="gray" stroke-width="0.9"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+  </div>
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <h2 class="text-2xl font-semibold mb-6 text-center">Student Portal Login</h2>
 

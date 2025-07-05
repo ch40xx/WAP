@@ -27,7 +27,16 @@ if (!$student) {
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-
+<div class="absolute inset-0 -z-10">
+    <svg class="w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="gray" stroke-width="0.9"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+  </div>
   <!-- Navbar -->
   <nav class="bg-gray-800 text-white shadow">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
