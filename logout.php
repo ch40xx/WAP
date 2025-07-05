@@ -17,7 +17,10 @@ header('Location: login.php');
 exit();
 ?>
 
+<?php
+
 // I first checked if a session was already active to avoid warnings
 // Then I cleared all session data and destroyed it to log out the user securely
 // Finally, I redirected the user back to login.php
 
+?>

@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$db   = '0362506_student_portal';
+$db   = 'student_portal_0362506';
 $user = 'root';
 $pass = ''; 
 

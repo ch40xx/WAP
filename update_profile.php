@@ -22,12 +22,19 @@ if (!$student) {
 
 // Initialize success or error message
 $message = '';
+$courses = ['Computer Science', 'Information Technology', 'Electronics', 'Civil Engineering', 'Business Studies'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize inputs
     $full_name = sanitizeInput($_POST['full_name']);
     $phone = sanitizeInput($_POST['phone']);
     $course = sanitizeInput($_POST['course']);
+
+    // Validate selected course
+    if (!in_array($course, $courses)) {
+        $message = "Invalid course selected.";
+    }
+
 
     // Handle profile image if uploaded
     $profile_pic_path = $student['profile_pic']; // keep existing unless new uploaded
@@ -90,13 +97,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="mb-4">
                 <label class="block text-sm font-medium">Phone</label>
-                <input type="text" name="phone" value="<?= htmlspecialchars($student['phone']) ?>" class="w-full mt-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="text" name="phone" value="<?= htmlspecialchars($student['phone']) ?>" 
+                    pattern="\d{10}" maxlength="10"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'')" 
+                    class="w-full mt-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    required>
             </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium">Course</label>
-                <input type="text" name="course" value="<?= htmlspecialchars($student['course']) ?>" class="w-full mt-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <select name="course" required class="w-full mt-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <option value="">-- Select Course --</option>
+                    <?php foreach ($courses as $c): ?>
+                        <option value="<?= $c ?>" <?= ($student['course'] === $c) ? 'selected' : '' ?>>
+                            <?= $c ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+
 
             <div class="mb-6">
                 <label class="block text-sm font-medium">Profile Picture</label>
@@ -109,11 +128,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 </html>
 
+<?php
 // I first made sure only logged-in students can access the page (auth.php)
 // Then I fetched the student data to pre-fill the form
 // On form submission, I sanitized inputs and checked if a new image was uploaded
+// Speaking of inputs I also checked if the selected course is one of the allowed options
+// If not, set an error message
+// If valid, proceed to update the database
 // I kept the old profile picture unless a new one is provided
 // Then I ran an UPDATE query to save the changes to the database
 // If successful, I set a session message and redirected to dashboard
 // I also added error messages if something fails
-
+?>

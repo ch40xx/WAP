@@ -40,10 +40,11 @@ function flashMessage($message, $type = 'success') {
 }
 ?>
 
+<? php
 // First I started the session to track login state
 // Then I checked if the user is already logged in, in which case they shouldn't see the login page again
 // I used a prepared statement to safely get the student from DB using the email
 // I verified the hashed password using password_verify
 // If login is valid, I stored the student ID in session and redirected to dashboard
 // If not, I showed an error using Tailwind-styled alert box
-
+?>

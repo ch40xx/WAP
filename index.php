@@ -1,7 +1,4 @@
 <?php
-// index.php
-
-// Start session so we can optionally show a "Go to Dashboard" button if logged in
 session_start();
 ?>
 
@@ -31,7 +28,7 @@ session_start();
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center">
         <div class="text-center max-w-2xl p-8">
-            <h2 class="text-3xl font-semibold mb-4">Welcome to the Student Portal 👨‍🎓</h2>
+            <h2 class="text-3xl font-semibold mb-4">Welcome to the Student Portal.</h2>
             <p class="text-gray-700 text-lg mb-6">
                 This portal allows students to manage their personal information, update profiles, and access academic details with ease.
             </p>
@@ -46,7 +43,7 @@ session_start();
 
     <!-- Footer -->
     <footer class="bg-white shadow p-4 text-center text-sm text-gray-600">
-        &copy; <?= date("Y") ?> Your Name. All rights reserved.
+        &copy; <?= date("Y") ?> | 0362506 | Web Application Programming
     </footer>
 
 </body>

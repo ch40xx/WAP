@@ -67,6 +67,7 @@ if (!$student) {
 </body>
 </html>
 
+<?php
 // First I checked if the session is active using includes/auth.php
 // Then I fetched the student info from the database using the ID stored in the session
 // If somehow the student is not found, I redirected to logout (maybe session is tampered)
@@ -74,3 +75,4 @@ if (!$student) {
 // The profile picture is shown if available, else a placeholder circle is shown
 // Below that, I displayed all main student details: name, email, phone, course
 
+?>

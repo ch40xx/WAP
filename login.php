@@ -20,6 +20,10 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get and sanitize email and password
     $email = sanitizeInput($_POST['email']);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = "Invalid email format.";
+    }
+
     $password = $_POST['password']; // no need to sanitize password
 
     // Prepare and execute query to find user by email
@@ -28,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Check if user exists and password is correct
-    if ($student && password_verify($password, $student['password'])) {
+    if ($student && password_verify($password,$student['password'])) {
         // Store user ID in session
         $_SESSION['student_id'] = $student['id'];
 
@@ -80,3 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 </html>
  
+<?php
+// I used filter_var() to validate the email format
+// This helps make sure the user didn’t type something invalid like "abc@"
+// If invalid, I stop the login/register/update and show an error message
+?>
