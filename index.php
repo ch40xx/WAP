@@ -26,10 +26,12 @@ session_start();
             <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
                 <h1 class="text-xl font-bold">Web Application Programming | Student Portal</h1>
                 <div class="space-x-4">
-                <a href="index.php" class="hover:underline">Home</a>
-                <a href="login.php" class="hover:underline">Login</a>
-                <?php if (isset($_SESSION['student_id'])): ?>
+                    <a href="index.php" class="hover:underline">Home</a>
+                    <?php if (isset($_SESSION['student_id'])): ?>
                         <a href="dashboard.php" class="hover:underline">Dashboard</a>
+                        <a href="logout.php" class="hover:underline text-red-300">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php" class="hover:underline">Login</a>
                     <?php endif; ?>
                 </div>
             </div>
