@@ -7,7 +7,7 @@ session_start();
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
-// If user is already logged in, redirect to dashboard
+// If user is already logged in then redirect to dashboard
 if (isset($_SESSION['student_id'])) {
     header('Location: dashboard.php');
     exit();

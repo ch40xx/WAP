@@ -14,7 +14,7 @@ $stmt = $pdo->prepare("SELECT * FROM students WHERE id = ?");
 $stmt->execute([$student_id]);
 $student = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// If student not found, logout
+// If student is not found then logout
 if (!$student) {
     header('Location: logout.php');
     exit();
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
         <h2 class="text-xl font-semibold mb-4">Update Your Profile</h2>
 
-        <!-- Show error if needed -->
+        <!-- Error Message  -->
         <?php if ($message): ?>
             <div class="bg-red-100 text-red-700 px-4 py-2 mb-4 rounded">
                 <?= $message ?>

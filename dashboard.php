@@ -1,22 +1,21 @@
 <?php
-// dashboard.php
 
 // Start session and protect page
 require_once 'includes/auth.php'; // redirects to login if not logged in
 
-// DB connection and functions
+// DB connect and functions
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
-// Get logged-in student ID from session
+// Gets logged in student ID from session
 $student_id = $_SESSION['student_id'];
 
-// Get student details from DB
+// Gets student details from DB
 $stmt = $pdo->prepare("SELECT * FROM students WHERE id = ?");
 $stmt->execute([$student_id]);
 $student = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// If student not found somehow (corrupt session), logout
+// If student is not found somehow then it logs out
 if (!$student) {
     header('Location: logout.php');
     exit();

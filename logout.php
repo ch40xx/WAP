@@ -1,5 +1,4 @@
 <?php
-// logout.php
 
 // Check if session is not started, then start it
 if (session_status() === PHP_SESSION_NONE) {
