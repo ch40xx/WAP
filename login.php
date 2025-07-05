@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="password" id="password" required class="w-full mt-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
-            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Login</button>
+            <button type="submit" class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2 rounded">Login</button>
         </form>
     </div>
 </body>

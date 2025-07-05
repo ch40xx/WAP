@@ -12,17 +12,19 @@ session_start();
 <body class="bg-gray-50 min-h-screen flex flex-col justify-between">
 
     <!-- Header/Nav -->
-    <header class="bg-white shadow p-4">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-blue-600">Student Portal</h1>
-            <nav>
-                <a href="index.php" class="text-gray-700 hover:text-blue-500 mr-4">Home</a>
-                <a href="login.php" class="text-gray-700 hover:text-blue-500 mr-4">Login</a>
+    <header class="bg-gray-800 shadow p-1">
+        <nav class="bg-gray-800 text-white shadow">
+            <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+                <h1 class="text-xl font-bold">Web Application Programming | Student Portal</h1>
+                <div class="space-x-4">
+                <a href="index.php" class="hover:underline">Home</a>
+                <a href="login.php" class="hover:underline">Login</a>
                 <?php if (isset($_SESSION['student_id'])): ?>
-                    <a href="dashboard.php" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-                <?php endif; ?>
-            </nav>
-        </div>
+                        <a href="dashboard.php" class="hover:underline">Dashboard</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Main Content -->
@@ -42,9 +44,9 @@ session_start();
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white shadow p-4 text-center text-sm text-gray-600">
-        &copy; <?= date("Y") ?> | 0362506 | Web Application Programming
-    </footer>
+    <footer class="text-center text-sm text-gray-500 mt-10 mb-4">
+    © <?= date('Y') ?> | 0362506 | Web Application Programming
+  </footer>
 
 </body>
 </html>

@@ -1,77 +1,74 @@
 <?php
+// dashboard.php
 
-// Start session and protect page
-require_once 'includes/auth.php'; // redirects to login if not logged in
-
-// DB connect and functions
 require_once 'includes/config.php';
+require_once 'includes/auth.php';
 require_once 'includes/functions.php';
 
-// Gets logged in student ID from session
+// Get student info from database using session ID
 $student_id = $_SESSION['student_id'];
-
-// Gets student details from DB
 $stmt = $pdo->prepare("SELECT * FROM students WHERE id = ?");
 $stmt->execute([$student_id]);
-$student = $stmt->fetch(PDO::FETCH_ASSOC);
+$student = $stmt->fetch();
 
-// If student is not found somehow then it logs out
+// Redirect if not found
 if (!$student) {
-    header('Location: logout.php');
+    header("Location: logout.php");
     exit();
 }
 ?>
 
-<!-- HTML PART -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard | Student Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Student Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow p-4 flex justify-between items-center">
-        <div class="text-xl font-bold">Student Portal</div>
-        <div>
-            <a href="update_profile.php" class="text-blue-500 hover:underline mr-4">Update Profile</a>
-            <a href="logout.php" class="text-red-500 hover:underline">Logout</a>
-        </div>
-    </nav>
-
-    <!-- Profile Section -->
-    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-md rounded p-6">
-        <h2 class="text-2xl font-semibold mb-4">Welcome, <?= htmlspecialchars($student['full_name']) ?> 👋</h2>
-
-        <!-- Profile Image -->
-        <?php if (!empty($student['profile_pic'])): ?>
-            <img src="<?= htmlspecialchars($student['profile_pic']) ?>" alt="Profile Photo" class="w-32 h-32 object-cover rounded-full mb-4">
-        <?php else: ?>
-            <div class="w-32 h-32 rounded-full bg-gray-300 mb-4 flex items-center justify-center text-gray-600">
-                No Photo
-            </div>
-        <?php endif; ?>
-
-        <!-- Student Info -->
-        <ul class="space-y-2 text-lg">
-            <li><strong>Full Name:</strong> <?= htmlspecialchars($student['full_name']) ?></li>
-            <li><strong>Email:</strong> <?= htmlspecialchars($student['email']) ?></li>
-            <li><strong>Phone:</strong> <?= htmlspecialchars($student['phone']) ?></li>
-            <li><strong>Course:</strong> <?= htmlspecialchars($student['course']) ?></li>
-        </ul>
+  <!-- Navbar -->
+  <nav class="bg-gray-800 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-semibold">Web Application Programming | Student Portal</h1>
+      <div class="space-x-6">
+        <a href="index.php" class="hover:underline">Home</a>
+        <a href="update_profile.php" class="hover:underline">Update Profile</a>
+        <a href="logout.php" class="hover:underline text-red-300">Logout</a>
+      </div>
     </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center">👋 Welcome, <?= htmlspecialchars($student['full_name']) ?></h2>
+
+    <!-- Profile Card -->
+    <div class="flex flex-col md:flex-row items-center gap-6">
+      <img
+        src="<?= $student['profile_pic'] ? htmlspecialchars($student['profile_pic']) : 'uploads/default.png' ?>"
+        alt="Profile Picture"
+        class="w-32 h-32 rounded-full object-cover border-4 border-blue-300 shadow"
+      />
+
+      <div class="flex-1 space-y-3">
+        <p><strong>Email:</strong> <span class="text-gray-700"><?= htmlspecialchars($student['email']) ?></span></p>
+        <p><strong>Phone:</strong> <span class="text-gray-700"><?= htmlspecialchars($student['phone']) ?></span></p>
+        <p><strong>Course:</strong> <span class="text-gray-700"><?= htmlspecialchars($student['course']) ?></span></p>
+      </div>
+    </div>
+
+    <!-- Update Profile Button -->
+    <div class="mt-8 text-center">
+      <a href="update_profile.php" class="inline-block bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-6 rounded-lg shadow">
+        Update Profile
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+
 </body>
 </html>
-
-<?php
-// First I checked if the session is active using includes/auth.php
-// Then I fetched the student info from the database using the ID stored in the session
-// If somehow the student is not found, I redirected to logout (maybe session is tampered)
-// In the frontend, I used Tailwind to design a clean profile card
-// The profile picture is shown if available, else a placeholder circle is shown
-// Below that, I displayed all main student details: name, email, phone, course
-
-?>
